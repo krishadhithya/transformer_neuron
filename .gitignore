@@ -1,0 +1,13 @@
+**/logs/*
+
+.DS_Store
+
+**/__pycache__/
+**/.ipynb_checkpoints/
+*.pyc
+
+**/data/*
+
+**/env
+*sandbox*.py
+.vscode/*
