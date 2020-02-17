@@ -1,0 +1,10 @@
+argparse
+loguru
+numpy
+tensorflow==1.15.0
+fa2
+networkx
+matplotlib
+tensorflow-datasets
+nltk
+sentencepiece
