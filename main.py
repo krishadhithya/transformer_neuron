@@ -41,7 +41,14 @@ if __name__ == "__main__":
         '--dataset',
         default='mnist',
         type=str,
-        help='Dataset on which to run the network. Default is mnist.')
+        help='Dataset on which to run the network. Default is mnist.'
+    )
+    parser.add_argument(
+        '--corpus_size',
+        default=1000000,
+        type=str,
+        help='Dataset corpus size.'
+    )
 
     hparams = parser.parse_args()
     main(hparams)

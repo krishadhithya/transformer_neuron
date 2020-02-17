@@ -1,6 +1,7 @@
 from loguru import logger
 import numpy as np
 import tensorflow_datasets as tfds
+import nltk
 
 
 def load_data_and_constants(hparams):
@@ -20,10 +21,45 @@ def load_data_and_constants(hparams):
     hparams.n_inputs = np.prod(inputs_shape)
     hparams.n_targets = dataset_features['label'].num_classes
 
-    dataset = prepare_dataset(dataset, hparams.batch_size, hparams.n_inputs,
-                              hparams.n_targets)
+    dataset = prepare_dataset(dataset, hparams.batch_size)
 
     return dataset, hparams
 
-def prepare_dataset(dataset, batch_size, n_inputs, n_targets):
-    pass
+def normalize_text(text):
+    regex_tokenizer = nltk.RegexpTokenizer("\w+")
+    # lowercase text
+    text = str(text).lower()
+    # remove non-UTF
+    text = text.encode("utf-8", "ignore").decode()
+    # remove punktuation symbols
+    text = " ".join(regex_tokenizer.tokenize(text))
+    return text
+
+def prepare_dataset(dataset, batch_size):
+    training_data = list(tfds.as_numpy(dataset['train']))
+    testing_data = list(tfds.as_numpy(dataset['test']))
+    train_set = []
+    test_set = []
+    
+    for train in range(0, len(training_data), batch_size):
+        train_batch = []
+
+        local_batch_limit = train + batch_size
+        if local_batch_limit > len(training_data):
+            batch_size = abs(len(training_data) - train)
+
+        for i in range(train, train + batch_size):
+            training_data[i]['sentence'] = normalize_text(training_data[i]['sentence'].decode("utf-8"))
+            train_batch.append(training_data[i])
+        train_set.append(train_batch)
+            
+    
+    for test in range(0, len(testing_data)):
+        testing_data[test]['sentence'] = normalize_text(testing_data[test]['sentence'].decode("utf-8"))
+        test_set.append(testing_data[test])
+    
+    dataset['train'] = train_set
+    dataset['test'] = test_set
+    
+    return dataset
+    
