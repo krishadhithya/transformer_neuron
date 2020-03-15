@@ -11,3 +11,7 @@
 **/env
 *sandbox*.py
 .vscode/*
+
+*.model
+*.vocab
+*.txt
