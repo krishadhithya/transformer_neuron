@@ -5,29 +5,12 @@ import tensorflow_datasets as tfds
 from bert import modeling, optimization, tokenization
 from bert.run_pretraining import input_fn_builder, model_fn_builder
 from loguru import logger
+from utils import load_data_and_constants
 
-from utils import (
-    load_data_and_constants, 
-    SPT
-)
 
-PRC_DATA_FPATH = "data/proc_dataset.txt" 
-
-def prepare_dataset(hparams):
+def main(hparams):
+    logger.info(tfds.list_builders())
     dataset, hparams = load_data_and_constants(hparams)
-    
-    logger.info("Dataset: {}".format(dataset['train'][0]))
-    
-    total_lines = len(dataset['train'])
-    
-    with open(PRC_DATA_FPATH, "w", encoding="utf-8") as prc_file:
-        for data in dataset['train']:
-            for sample in data:
-                prc_file.write(sample['sentence'] + '\n')
-        
-    spt = SPT(PRC_DATA_FPATH)
-    spt.train_sentencetrainer()
-    
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -67,5 +50,5 @@ if __name__ == "__main__":
         help='Dataset corpus size.'
     )
 
-    hparams = parser.parse_args()
-    prepare_dataset(hparams)
+hparams = parser.parse_args()
+main(hparams)
