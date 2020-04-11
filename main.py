@@ -50,5 +50,5 @@ if __name__ == "__main__":
         help='Dataset corpus size.'
     )
 
-    hparams = parser.parse_args()
-    main(hparams)
+hparams = parser.parse_args()
+main(hparams)

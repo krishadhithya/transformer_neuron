@@ -3,7 +3,6 @@ import numpy as np
 import tensorflow_datasets as tfds
 import nltk
 
-
 def load_data_and_constants(hparams):
     '''Returns the dataset and sets hparams.n_inputs and hparamsn_targets.'''
     logger.info("Loading dataset '{}'".format(hparams.dataset))
