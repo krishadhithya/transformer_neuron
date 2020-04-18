@@ -1,7 +1,7 @@
 
 import numpy as np
 import tensorflow as tf
-from MultiHeadAttention import MultiHeadAttention
+from Transformer.MultiHeadAttention import MultiHeadAttention
 
 class Decoder(tf.keras.Model):
     """
