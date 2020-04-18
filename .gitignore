@@ -6,8 +6,6 @@
 **/.ipynb_checkpoints/
 *.pyc
 
-**/data/*
-
 **/env
 *sandbox*.py
 .vscode/*
