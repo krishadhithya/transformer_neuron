@@ -13,6 +13,8 @@ import time
 import tensorflow_datasets as tfds
 from WarmupThenDecaySchedule import WarmupThenDecaySchedule
 
+tf.compat.v1.enable_eager_execution()
+    
 URL = 'https://www.manythings.org/anki/fra-eng.zip'
 FILENAME = 'fra-eng.zip'
 NUM_EPOCHS = 15
@@ -29,6 +31,8 @@ raw_data_fr = None
 
 encoder = None
 decoder = None
+
+vocab_size_overhead = 10000
 
 def download_and_read_file(url, filename):
     if not os.path.exists(filename):
@@ -156,10 +160,15 @@ def setup_pes(data_en, data_fr_in, model_size=128):
     
     return pes
 
-def loss_function(targets, logits):
+def loss_function(
+    targets, 
+    logits, 
+    crossentropy=tf.keras.losses.SparseCategoricalCrossentropy(
+        from_logits=True)
+    ):
     mask = tf.math.logical_not(tf.math.equal(targets, 0))
     mask = tf.cast(mask, dtype=tf.int64)
-    loss = CROSSENTROPY(targets, logits, sample_weight=mask)
+    loss = crossentropy(targets, logits, sample_weight=mask)
     
     return loss
 
@@ -167,69 +176,78 @@ def setup_transformer(model_size=128, h=8, num_layers=4, pes=None):
     global encoder
     global decoder
     
-    vocab_size = len(en_tokenizer.word_index) + 1
+    vocab_size = len(en_tokenizer.word_index) + vocab_size_overhead
     encoder = Encoder(vocab_size, model_size, num_layers, h, pes)
     decoder = Decoder(vocab_size, model_size, num_layers, h, pes)
     
 
 def predict(test_source_text=None):
-    global raw_data_en
-    global raw_data_fr
-    # if test sentence is not provided, randomly pick one up from the training data
+    """ Predict the output sentence for a given input sentence
+
+    Args:
+        test_source_text: input sentence (raw string)
+    
+    Returns:
+        The encoder's attention vectors
+        The decoder's bottom attention vectors
+        The decoder's middle attention vectors
+        The input string array (input sentence split by ' ')
+        The output string array
+    """
+    global fr_tokenizer
+    global en_tokenizer
+
     if test_source_text is None:
         test_source_text = raw_data_en[np.random.choice(len(raw_data_en))]
-    
-    logger.info("Test source text: {}".format(test_source_text))
-    
-    # Tokenize the test sentence to obtain the source sequence
+    print(test_source_text)
     test_source_seq = en_tokenizer.texts_to_sequences([test_source_text])
-    logger.info("Test source sequence: {}".format(test_source_seq))
-    
-    en_output = encoder(tf.constant(test_source_seq), training=False)
-    de_input = tf.constant([[fr_tokenizer.word_index['<start>']]], dtype=tf.int64)
-    
+    print(test_source_seq)
+
+    en_output, en_alignments = encoder(tf.constant(test_source_seq), training=False)
+
+    de_input = tf.constant(
+        [[fr_tokenizer.word_index['<start>']]], dtype=tf.int64)
+
     out_words = []
-    
+
     while True:
-        de_output = decoder(de_input, en_output, training=False)
-        
-        # Take the last token as predicted token
+        de_output, de_bot_alignments, de_mid_alignments = decoder(de_input, en_output, training=False)
         new_word = tf.expand_dims(tf.argmax(de_output, -1)[:, -1], axis=1)
         out_words.append(fr_tokenizer.index_word[new_word.numpy()[0][0]])
-        
-        # The next input is a new sequence
-        # Contains both theinput sequence and the predicted token
+
+        # Transformer doesn't have sequential mechanism (i.e. states)
+        # so we have to add the last predicted word to create a new input sequence
         de_input = tf.concat((de_input, new_word), axis=-1)
-        
-        # End of hitting <end> or length exceeds 14
+
+        # TODO: get a nicer constraint for the sequence length!
         if out_words[-1] == '<end>' or len(out_words) >= 14:
             break
-    
+
     print(' '.join(out_words))
+    return en_alignments, de_bot_alignments, de_mid_alignments, test_source_text.split(' '), out_words
 
 def train_model(dataset, num_epochs=15):
-    start_time = time.time()
-    for e in range(num_epochs):
-        
-        logger.info("Training EPOCH {}...".format(e) )
-        for batch, (source_seq, target_seq_in, target_seq_out) in enumerate(tfds.as_numpy(dataset)):
-            loss = train_step(source_seq, target_seq_in, target_seq_out)
-                
-        if batch % 100 == 0:
-            print('Epoch {} Batch {} Loss {:.4f} Elapsed time {:.2f}s'.format(
+    starttime = time.time()
+    for e in range(NUM_EPOCHS):
+        for batch, (source_seq, target_seq_in, target_seq_out) in enumerate(dataset.take(-1)):
+            loss, gradient = train_step(source_seq, target_seq_in,
+                            target_seq_out)
+
+            logger.info('Epoch {} Batch {} Loss {:.4f} Elapsed time {:.2f}s'.format(
                 e + 1, batch, loss.numpy(), time.time() - starttime))
-            starttime = time.time()      
-            
+            starttime = time.time()
+
         try:
             predict()
         except Exception as e:
-            logger.exception(e)
+            print(e)
             continue
 
 
 @tf.function
 def train_step(source_seq, target_seq_in, target_seq_out):
     """ Execute one training step (forward pass + backward pass)
+    
     Args:
         source_seq: source sequences
         target_seq_in: input target sequences (<start> + ...)
@@ -238,14 +256,11 @@ def train_step(source_seq, target_seq_in, target_seq_out):
     Returns:
         The loss value of the current pass
     """
-    
     with tf.GradientTape() as tape:
         encoder_mask = 1 - tf.cast(tf.equal(source_seq, 0), dtype=tf.float32)
-        
         # encoder_mask has shape (batch_size, source_len)
         # we need to add two more dimensions in between
         # to make it broadcastable when computing attention heads
-        
         encoder_mask = tf.expand_dims(encoder_mask, axis=1)
         encoder_mask = tf.expand_dims(encoder_mask, axis=1)
         encoder_output, _ = encoder(source_seq, encoder_mask=encoder_mask)
@@ -262,8 +277,11 @@ def train_step(source_seq, target_seq_in, target_seq_out):
     return loss, gradients
 
 if __name__ == "__main__":
+    
     lines = download_and_read_file(URL, FILENAME)
     dataset, pes = prepare_dataset(lines)
+    #import pdb
+    #pdb.set_trace()
     setup_transformer(model_size=128, h=8, num_layers=4, pes=pes)
     #assert not isinstance(dataset, tf.data.Dataset)
     logger.info("Transformer setup complete, training model...")
