@@ -22,11 +22,7 @@ def main(hparams):
         
         # Setup transformer network
         model = Transformer(hparams, lines)
-        
-        
-        
-        
-    
+        model.train_model()
 
 
 if __name__ == "__main__":
