@@ -14,14 +14,18 @@ def main(hparams):
     
     logger.info("Building Components..")
     
+    # Build components.
+    components = []
     for i in range(hparams.n_components):
         # Get raw data
         lines = download_and_read_file(hparams.dataset)
         
         # Setup transformer network
         model = Transformer(hparams, lines)
-        logger.info("Training Model...")
-        model.train_model()
+        
+        
+        
+        
     
 
 
