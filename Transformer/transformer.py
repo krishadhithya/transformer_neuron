@@ -24,6 +24,8 @@ OPTIMIZER = tf.keras.optimizers.Adam(lr,
                                      epsilon=1e-9)
 en_tokenizer = None
 fr_tokenizer = None
+raw_data_en = None
+raw_data_fr = None
 
 encoder = None
 decoder = None
@@ -161,20 +163,6 @@ def loss_function(targets, logits):
     
     return loss
 
-@tf.function
-def train_step(source_seq, target_seq_in, target_seq_out):
-    with tf.GradientTape() as tape:
-        encoder_output = encoder(source_seq)
-        decoder_output = decoder(target_seq_in, encoder_output)
-        
-        loss = loss_function(target_seq_out, decoder_output)
-    
-    variables = encoder.trainable_variables + decoder.trainable_variables
-    gradients = tape.gradient(loss, variables)
-    OPTIMIZER.apply_gradients(zip(gradients, variables))
-    
-    return loss, gradients
-
 def setup_transformer(model_size=128, h=8, num_layers=4, pes=None):
     global encoder
     global decoder
@@ -185,6 +173,8 @@ def setup_transformer(model_size=128, h=8, num_layers=4, pes=None):
     
 
 def predict(test_source_text=None):
+    global raw_data_en
+    global raw_data_fr
     # if test sentence is not provided, randomly pick one up from the training data
     if test_source_text is None:
         test_source_text = raw_data_en[np.random.choice(len(raw_data_en))]
@@ -195,13 +185,13 @@ def predict(test_source_text=None):
     test_source_seq = en_tokenizer.texts_to_sequences([test_source_text])
     logger.info("Test source sequence: {}".format(test_source_seq))
     
-    en_output = encoder(tf.constant(test_source_seq))
+    en_output = encoder(tf.constant(test_source_seq), training=False)
     de_input = tf.constant([[fr_tokenizer.word_index['<start>']]], dtype=tf.int64)
     
     out_words = []
     
     while True:
-        de_output = decoder(de_input, en_output)
+        de_output = decoder(de_input, en_output, training=False)
         
         # Take the last token as predicted token
         new_word = tf.expand_dims(tf.argmax(de_output, -1)[:, -1], axis=1)
@@ -217,23 +207,59 @@ def predict(test_source_text=None):
     
     print(' '.join(out_words))
 
-def train_model(dataset, num_epochs=100):
+def train_model(dataset, num_epochs=15):
     start_time = time.time()
-    
     for e in range(num_epochs):
+        
+        logger.info("Training EPOCH {}...".format(e) )
         for batch, (source_seq, target_seq_in, target_seq_out) in enumerate(tfds.as_numpy(dataset)):
             loss = train_step(source_seq, target_seq_in, target_seq_out)
+                
+        if batch % 100 == 0:
+            print('Epoch {} Batch {} Loss {:.4f} Elapsed time {:.2f}s'.format(
+                e + 1, batch, loss.numpy(), time.time() - starttime))
+            starttime = time.time()      
+            
+        try:
+            predict()
+        except Exception as e:
+            logger.exception(e)
+            continue
+
+
+@tf.function
+def train_step(source_seq, target_seq_in, target_seq_out):
+    """ Execute one training step (forward pass + backward pass)
+    Args:
+        source_seq: source sequences
+        target_seq_in: input target sequences (<start> + ...)
+        target_seq_out: output target sequences (... + <end>)
+    
+    Returns:
+        The loss value of the current pass
+    """
+    
+    with tf.GradientTape() as tape:
+        encoder_mask = 1 - tf.cast(tf.equal(source_seq, 0), dtype=tf.float32)
         
-        logger.info("EPOCH {} Loss {:.4f}".format(e + 1, loss.numpy()))
+        # encoder_mask has shape (batch_size, source_len)
+        # we need to add two more dimensions in between
+        # to make it broadcastable when computing attention heads
         
-        if (e + 1) % 10 == 0:
-            end_time = time.time()
-            logger.info("Average elapsed time: {:.2} seconds".format((end_time - start_time) / (e + 1)))
-            try:
-                predict()
-            except Exception as e:
-                logger.exception(e)
-                continue
+        encoder_mask = tf.expand_dims(encoder_mask, axis=1)
+        encoder_mask = tf.expand_dims(encoder_mask, axis=1)
+        encoder_output, _ = encoder(source_seq, encoder_mask=encoder_mask)
+
+        decoder_output, _, _ = decoder(
+            target_seq_in, encoder_output, encoder_mask=encoder_mask)
+
+        loss = loss_function(target_seq_out, decoder_output)
+    
+    variables = encoder.trainable_variables + decoder.trainable_variables
+    gradients = tape.gradient(loss, variables)
+    OPTIMIZER.apply_gradients(zip(gradients, variables))
+    
+    return loss, gradients
 
 if __name__ == "__main__":
     lines = download_and_read_file(URL, FILENAME)

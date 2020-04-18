@@ -3,6 +3,23 @@ import tensorflow as tf
 from MultiHeadAttention import MultiHeadAttention
 
 class Encoder(tf.keras.Model):
+        
+    """ Class for the Encoder
+    Args:
+        model_size: d_model in the paper (depth size of the model)
+        num_layers: number of layers (Multi-Head Attention + FNN)
+        h: number of attention heads
+        embedding: Embedding layer
+        embedding_dropout: Dropout layer for Embedding
+        attention: array of Multi-Head Attention layers
+        attention_dropout: array of Dropout layers for Multi-Head Attention
+        attention_norm: array of LayerNorm layers for Multi-Head Attention
+        dense_1: array of first Dense layers for FFN
+        dense_2: array of second Dense layers for FFN
+        ffn_dropout: array of Dropout layers for FFN
+        ffn_norm: array of LayerNorm layers for FFN
+    """
+        
     def __init__(self, vocab_size, model_size, num_layers, h, pes):
         super(Encoder, self).__init__()
         self.model_size = model_size
@@ -12,10 +29,12 @@ class Encoder(tf.keras.Model):
         
         # One embedding layer
         self.embedding = tf.keras.layers.Embedding(vocab_size, model_size)
+        self.embedding_dropout = tf.keras.layers.Dropout(0.1)
         
         # num_layers Multi-Head attention and normalization layers
         self.attention = [MultiHeadAttention (model_size, h) for _ in range(num_layers)]
-        self.attention_norm = [tf.keras.layers.BatchNormalization() for _ in range(num_layers)]
+        self.attention_norm = [tf.keras.layers.LayerNormalization(epsilon=1e-6) for _ in range(num_layers)]
+        self.attention_dropout = [tf.keras.layers.Dropout(0.1) for _ in range(num_layers)]
         
         # num_layers FFN and normalization layers
         self.dense_1 = [tf.keras.layers.Dense(model_size * 4, activation='relu') for _ in range(num_layers)]
@@ -23,53 +42,45 @@ class Encoder(tf.keras.Model):
         
         # Should use LayerNorm, technically, but BatchNormalization seems to work fine as is.
         # TODO: Explore using LayerNorm later.
-        self.ffn_norm = [tf.keras.layers.BatchNormalization() for _ in range(num_layers)]
+        self.ffn_dropout = [tf.keras.layers.Dropout(0.1) for _ in range(num_layers)]
+        self.ffn_norm = [tf.keras.layers.LayerNormalization(
+            epsilon=1e-6) for _ in range(num_layers)]
+                
+    def call(self, sequence, training=True, encoder_mask=None):
         
-    def call(self, sequence):
+        """ Forward pass for the Encoder
+        Args:
+            sequence: source input sequences
+            training: whether training or not (for Dropout)
+            encoder_mask: padding mask for the Encoder's Multi-Head Attention
         
-        # Forward pass of the encoder
-        sub_in = []
-        for i in range(sequence.shape[1]):
-            # compute the embedded vector
-            embed = self.embedding(tf.expand_dims(sequence[:, i], axis = 1))
-            
-            # Add positional encoding to the embedded vector
-            sub_in.append(embed + self.pes[i, :])
-        
-        # Concatenate the result so that the shape is (batch_size, length, model_size)
-        sub_in = tf.concat(sub_in, axis=1)
-        
-        # Layers of the multi-head attention 
-        # We will have num_layers of (Attention + FFN)
+        Returns:
+            The output of the Encoder (batch_size, length, model_size)
+            The alignment (attention) vectors for all layers
+        """
+        embed_out = self.embedding(sequence)
+
+        embed_out *= tf.math.sqrt(tf.cast(self.model_size, tf.float32))
+        embed_out += self.pes[:sequence.shape[1], :]
+        embed_out = self.embedding_dropout(embed_out)
+
+        sub_in = embed_out
+        alignments = []
+
         for i in range(self.num_layers):
-            sub_out = []
-            
-            # Iterate along the sequence length
-            for j in range(sub_in.shape[1]):
-                # Compute the context vector towards the whole sequence
-                attention = self.attention[i](tf.expand_dims(sub_in[:, j, :], axis=1), sub_in)
-                sub_out.append(attention)
-            
-            # Concatenate the result to get shape (batch_size, length, model_size)
-            sub_out = tf.concat(sub_out, axis=1)
-            
-            # Residual connection followed by normalization layer
+            sub_out, alignment = self.attention[i](sub_in, sub_in, encoder_mask)
+            sub_out = self.attention_dropout[i](sub_out, training=training)
             sub_out = sub_in + sub_out
-            # Normalize the output
             sub_out = self.attention_norm[i](sub_out)
             
-            # Layers of the feed-forward network
-            # The feed forward network input is the output of the multi-headed attention
+            alignments.append(alignment)
             ffn_in = sub_out
-            
+
             ffn_out = self.dense_2[i](self.dense_1[i](ffn_in))
-            # Add the residual connection
+            ffn_out = self.ffn_dropout[i](ffn_out, training=training)
             ffn_out = ffn_in + ffn_out
-            # Normalize the output
             ffn_out = self.ffn_norm[i](ffn_out)
-            
-            # Assign the feed forward output to the next layer's multi-head attention input
+
             sub_in = ffn_out
-            
-        # Return the result when done
-        return ffn_out
+
+        return ffn_out, alignments
