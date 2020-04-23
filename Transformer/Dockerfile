@@ -1,3 +1,3 @@
 FROM unconst/bittensor
 
-COPY transformer bittensor/neurons/Transformer
+COPY transformer bittensor/neurons/transformer
