@@ -2,6 +2,7 @@ import re
 import time
 import tensorflow as tf
 import numpy as np
+import random
 import unicodedata
 from Transformer.Decoder import Decoder
 from Transformer.Encoder import Encoder
@@ -16,6 +17,7 @@ class Transformer():
         self.fr_tokenizer = None
         self.encoder = None
         self.decoder = None
+        self.batches = []
         self.vocab_size_overhead = 10000
         self.optimizer = tf.keras.optimizers.Adam(hparams.learning_rate,
                                      beta_1=0.9,
@@ -24,6 +26,9 @@ class Transformer():
         
         # Get dataset and positional embeddings
         self.dataset, self.pes = self.prepare_dataset(raw_dataset)
+        
+        # Get batches from dataset
+        self.extract_batches()
         
         logger.info("Setting up transformer")
         self.setup_transformer(
@@ -44,6 +49,21 @@ class Transformer():
         s = re.sub(r'\s+', r' ', s)
         return s
 
+    def extract_batches(self):
+        logger.info("Extracting batches...")
+        for batch, (source_seq, target_seq_in, target_seq_out) in enumerate(self.dataset.take(-1)):
+            self.batches.append({batch: (source_seq, target_seq_in, target_seq_out)})
+    
+    def next_batch(self):
+        index = random.randint(0, len(self.batches) - 1)
+        unrolled_batch = list(self.batches[index].values())[0]
+        
+        spikes = unrolled_batch[0]
+        target_seqs_in = unrolled_batch[1]
+        target_seqs_out = unrolled_batch[2]
+        
+        return spikes, target_seqs_in, target_seqs_out
+        
     def prepare_dataset(self, lines, model_size=128, batch_size=64, test_mode=False):
         
         lines = lines.decode('utf-8')
@@ -206,6 +226,8 @@ class Transformer():
         
         Args:
             num_epochs: number of epochs to train over
+            # TODO: 
+                - Function to alter batch size
         """
         starttime = time.time()
         for e in range(self.hparams.num_epochs):

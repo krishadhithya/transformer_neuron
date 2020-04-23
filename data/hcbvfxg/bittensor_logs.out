@@ -1,0 +1,52 @@
+2020-04-23 01:51:19.720 | DEBUG    | __main__:<module>:1 - === BitTensor ===
+2020-04-23 01:51:19.844 | DEBUG    | __main__:<module>:1 - Args {
+2020-04-23 01:51:19.981 | DEBUG    | __main__:<module>:1 -    EOSURL: http://host.docker.internal:8888
+2020-04-23 01:51:20.105 | DEBUG    | __main__:<module>:1 -    IDENTITY: hcbvfxg
+2020-04-23 01:51:20.211 | DEBUG    | __main__:<module>:1 -    SERVE_ADDRESS: host.docker.internal
+2020-04-23 01:51:20.317 | DEBUG    | __main__:<module>:1 -    BIND_ADDRESS: 0.0.0.0
+2020-04-23 01:51:20.421 | DEBUG    | __main__:<module>:1 -    PORT: 8404
+2020-04-23 01:51:20.523 | DEBUG    | __main__:<module>:1 -    LOGDIR: data/hcbvfxg/logs
+2020-04-23 01:51:20.630 | DEBUG    | __main__:<module>:1 -    NEURON: transformer
+2020-04-23 01:51:20.738 | DEBUG    | __main__:<module>:1 - }
+2020-04-23 01:51:20.835 | DEBUG    | __main__:<module>:1 - 
+2020-04-23 01:51:20.947 | DEBUG    | __main__:<module>:1 - === setup accounts ===
+2020-04-23 01:51:21.068 | DEBUG    | __main__:<module>:1 - cleos -u http://host.docker.internal:8888 wallet unlock -n eosio --password PW5JgJBjC1QXf8XoYPFY56qF5SJLLJNfjHbCai3DyC6We1FeBRL8q
+"/usr/opt/eosio/2.0.2/bin/keosd" launched
+[31mError 3120002: Nonexistent wallet[0m
+[32mAre you sure you typed the wallet name correctly?[0m
+[33mError Details:
+Unable to open file: /root/eosio-wallet/./eosio.wallet[0m
+2020-04-23 01:51:21.199 | SUCCESS  | __main__:<module>:1 - unlocked eosio.
+2020-04-23 01:51:21.327 | DEBUG    | __main__:<module>:1 - cleos -u http://host.docker.internal:8888 wallet create -n eosio --to-console
+Creating wallet: eosio
+Save password to use in the future to unlock this wallet.
+Without password imported keys will not be retrievable.
+"PW5JACVa2qUt9XEQq2n4tf8AxMxwKzbD1q1Pj2npJY5EaAGq6DXnF"
+2020-04-23 01:51:21.460 | SUCCESS  | __main__:<module>:1 - created wallet: eosio.
+2020-04-23 01:51:21.558 | DEBUG    | __main__:<module>:1 - cleos -u http://host.docker.internal:8888 wallet import -n eosio --private-key 5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3
+imported private key for: EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV
+2020-04-23 01:51:21.676 | SUCCESS  | __main__:<module>:1 - imported eosio key.
+2020-04-23 01:51:21.774 | DEBUG    | __main__:<module>:1 - cleos -u http://host.docker.internal:8888 create account eosio hcbvfxg EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV
+executed transaction: 334b6f8e5d3a8e16e47445bf9d60a6158387307917f8dd3d3b7bc42822132640  200 bytes  269 us
+warn  2020-04-23T01:51:21.820 cleos     main.cpp:506                  print_result         ] warning: transaction executed locally, but may not be confirmed by the network yet
+#         eosio <= eosio::newaccount            {"creator":"eosio","name":"hcbvfxg","owner":{"threshold":1,"keys":[{"key":"EOS6MRyAjQq8ud7hVNYcfnVPJ...
+2020-04-23 01:51:21.906 | SUCCESS  | __main__:<module>:1 - created account: hcbvfxg.
+2020-04-23 01:51:22.006 | DEBUG    | __main__:<module>:1 - cleos -u http://host.docker.internal:8888 push action bittensoracc subscribe [hcbvfxg,
+executed transaction: e4531708b94010b23bac613c722a0cf0c0ac6a3077515ceae55cfc6f21a402ea  128 bytes  333 us
+warn  2020-04-23T01:51:22.061 cleos     main.cpp:506                  print_result         ] warning: transaction executed locally, but may not be confirmed by the network yet
+#  bittensoracc <= bittensoracc::subscribe      {"user":"hcbvfxg","address":"host.docker.internal","port":"8404"}
+>> subscribe 
+2020-04-23 01:51:22.145 | SUCCESS  | __main__:<module>:1 - subscribe account: hcbvfxg.
+2020-04-23 01:51:22.242 | DEBUG    | __main__:<module>:1 - cleos get table bittensoracc bittensoracc metagraph
+2020-04-23 01:51:22.339 | DEBUG    | __main__:<module>:1 - Metagraph:
+2020-04-23 01:51:22.652 | DEBUG    | __main__:<module>:1 - 
+2020-04-23 01:51:22.748 | DEBUG    | __main__:<module>:1 - === start Neuron ===
+2020-04-23 01:51:22.851 | DEBUG    | __main__:<module>:1 - python3 transformer/main.py --identity hcbvfxg --serve_address host.docker.internal --bind_address 0.0.0.0 --port 8404 --eosurl http://host.docker.internal:8888 --logdir data/hcbvfxg/logs
+2020-04-23 01:51:59.251 | DEBUG    | __main__:<module>:1 - === stopped Nucleus ===
+2020-04-23 01:51:59.344 | DEBUG    | __main__:<module>:1 - cleos -u http://host.docker.internal:8888 push action bittensoracc unsubscribe [hcbvfxg] -p hcbvfxg@active
+executed transaction: cf4dd0e016e1bcdccc0dc475b12d296f8890a20f1e31ed36855bcf2d1759c5f9  104 bytes  528 us
+warn  2020-04-23T01:51:59.516 cleos     main.cpp:506                  print_result         ] warning: transaction executed locally, but may not be confirmed by the network yet
+#  bittensoracc <= bittensoracc::unsubscribe    {"user":"hcbvfxg"}
+>> unsubscribe 
+2020-04-23 01:51:59.612 | SUCCESS  | __main__:<module>:1 - unsubscribe account: hcbvfxg.
+2020-04-23 01:51:59.706 | DEBUG    | __main__:<module>:1 - === unsubscribed from Metagraph. ===

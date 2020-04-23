@@ -8,3 +8,4 @@ matplotlib
 tensorflow-datasets
 nltk
 sentencepiece
+timeloop

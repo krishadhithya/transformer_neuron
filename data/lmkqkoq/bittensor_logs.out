@@ -1,0 +1,51 @@
+2020-04-23 02:09:06.782 | DEBUG    | __main__:<module>:1 - === BitTensor ===
+2020-04-23 02:09:07.004 | DEBUG    | __main__:<module>:1 - Args {
+2020-04-23 02:09:07.215 | DEBUG    | __main__:<module>:1 -    EOSURL: http://host.docker.internal:8888
+2020-04-23 02:09:07.438 | DEBUG    | __main__:<module>:1 -    IDENTITY: lmkqkoq
+2020-04-23 02:09:07.646 | DEBUG    | __main__:<module>:1 -    SERVE_ADDRESS: host.docker.internal
+2020-04-23 02:09:07.854 | DEBUG    | __main__:<module>:1 -    BIND_ADDRESS: 0.0.0.0
+2020-04-23 02:09:08.066 | DEBUG    | __main__:<module>:1 -    PORT: 20449
+2020-04-23 02:09:08.275 | DEBUG    | __main__:<module>:1 -    LOGDIR: data/lmkqkoq/logs
+2020-04-23 02:09:08.479 | DEBUG    | __main__:<module>:1 -    NEURON: transformer
+2020-04-23 02:09:08.684 | DEBUG    | __main__:<module>:1 - }
+2020-04-23 02:09:08.893 | DEBUG    | __main__:<module>:1 - 
+2020-04-23 02:09:09.104 | DEBUG    | __main__:<module>:1 - === setup accounts ===
+2020-04-23 02:09:09.320 | DEBUG    | __main__:<module>:1 - cleos -u http://host.docker.internal:8888 wallet unlock -n eosio --password PW5JgJBjC1QXf8XoYPFY56qF5SJLLJNfjHbCai3DyC6We1FeBRL8q
+"/usr/opt/eosio/2.0.2/bin/keosd" launched
+[31mError 3120002: Nonexistent wallet[0m
+[32mAre you sure you typed the wallet name correctly?[0m
+[33mError Details:
+Unable to open file: /root/eosio-wallet/./eosio.wallet[0m
+2020-04-23 02:09:09.593 | SUCCESS  | __main__:<module>:1 - unlocked eosio.
+2020-04-23 02:09:09.904 | DEBUG    | __main__:<module>:1 - cleos -u http://host.docker.internal:8888 wallet create -n eosio --to-console
+Creating wallet: eosio
+Save password to use in the future to unlock this wallet.
+Without password imported keys will not be retrievable.
+"PW5J8r4tFde2ps1HQURMneFgFQHGdSxLUQFiMBWKNmgEVh9o9sN2Z"
+2020-04-23 02:09:10.181 | SUCCESS  | __main__:<module>:1 - created wallet: eosio.
+2020-04-23 02:09:10.427 | DEBUG    | __main__:<module>:1 - cleos -u http://host.docker.internal:8888 wallet import -n eosio --private-key 5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3
+imported private key for: EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV
+2020-04-23 02:09:10.673 | SUCCESS  | __main__:<module>:1 - imported eosio key.
+2020-04-23 02:09:10.880 | DEBUG    | __main__:<module>:1 - cleos -u http://host.docker.internal:8888 create account eosio lmkqkoq EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV
+executed transaction: e9dda0fe1b6896193f59d6feb234d58c4a04bea97870228c50d11a1b4b48869f  200 bytes  354 us
+warn  2020-04-23T02:09:11.018 cleos     main.cpp:506                  print_result         ] warning: transaction executed locally, but may not be confirmed by the network yet
+#         eosio <= eosio::newaccount            {"creator":"eosio","name":"lmkqkoq","owner":{"threshold":1,"keys":[{"key":"EOS6MRyAjQq8ud7hVNYcfnVPJ...
+2020-04-23 02:09:11.205 | SUCCESS  | __main__:<module>:1 - created account: lmkqkoq.
+2020-04-23 02:09:11.409 | DEBUG    | __main__:<module>:1 - cleos -u http://host.docker.internal:8888 push action bittensoracc subscribe [lmkqkoq,
+executed transaction: 5fa4cfe391e3147e1e950c5b1c94b8f00c0851e4d206175d9d24c2713fff8efc  128 bytes  793 us
+warn  2020-04-23T02:09:11.517 cleos     main.cpp:506                  print_result         ] warning: transaction executed locally, but may not be confirmed by the network yet
+#  bittensoracc <= bittensoracc::subscribe      {"user":"lmkqkoq","address":"host.docker.internal","port":"20449"}
+>> subscribe 
+2020-04-23 02:09:11.709 | SUCCESS  | __main__:<module>:1 - subscribe account: lmkqkoq.
+2020-04-23 02:09:11.916 | DEBUG    | __main__:<module>:1 - cleos get table bittensoracc bittensoracc metagraph
+2020-04-23 02:09:12.119 | DEBUG    | __main__:<module>:1 - Metagraph:
+2020-04-23 02:09:12.754 | DEBUG    | __main__:<module>:1 - 
+2020-04-23 02:09:12.959 | DEBUG    | __main__:<module>:1 - === start Neuron ===
+2020-04-23 02:09:13.164 | DEBUG    | __main__:<module>:1 - python3 transformer/main.py --identity lmkqkoq --serve_address host.docker.internal --bind_address 0.0.0.0 --port 20449 --eosurl http://host.docker.internal:8888 --logdir data/lmkqkoq/logs
+2020-04-23 02:10:30.515 | DEBUG    | __main__:<module>:1 - === stopped Nucleus ===
+2020-04-23 02:10:30.714 | DEBUG    | __main__:<module>:1 - cleos -u http://host.docker.internal:8888 push action bittensoracc unsubscribe [lmkqkoq] -p lmkqkoq@active
+[31mError 3090003: Provided keys, permissions, and delays do not satisfy declared authorizations[0m
+[32mEnsure that you have the related private keys inside your wallet and your wallet is unlocked.[0m
+[33mError Details:
+transaction declares authority '{"actor":"lmkqkoq","permission":"active"}', but does not have signatures for it.[0m
+2020-04-23 02:10:30.993 | ERROR    | __main__:<module>:1 - failed to unsubscribe account: lmkqkoq. Check your EOSURL connection.

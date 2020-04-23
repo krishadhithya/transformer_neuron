@@ -1,8 +1,5 @@
 syntax = "proto3";
 
-// NOTE(const): Not used.
-// TODO(const): Switch to Bittensor protocol.
-
 service Bittensor {
 	// Query remote component with text-features, responses are var-length vector
 	// representations of the text.

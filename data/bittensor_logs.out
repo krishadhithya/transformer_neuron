@@ -1,0 +1,139 @@
+2020-04-22 21:48:31.981 | DEBUG    | __main__:<module>:1 -                                                                         bbbbbbbb                                                                    
+2020-04-22 21:48:32.088 | DEBUG    | __main__:<module>:1 -                                       hhhhhhh                           b::::::b                                                                    
+2020-04-22 21:48:32.199 | DEBUG    | __main__:<module>:1 -                                       h:::::h                           b::::::b                                                                    
+2020-04-22 21:48:32.311 | DEBUG    | __main__:<module>:1 -                                       h:::::h                           b::::::b                                                                    
+2020-04-22 21:48:32.423 | DEBUG    | __main__:<module>:1 -                                       h:::::h                           b:::::b                                                                    
+2020-04-22 21:48:32.539 | DEBUG    | __main__:<module>:1 - rrrrr   rrrrrrrrr      eeeeeeeeeeee   h::::h hhhhh         ooooooooooo  b:::::bbbbbbbbb      ooooooooooo    aaaaaaaaaaaaa     mmmmmmm    mmmmmmm   
+2020-04-22 21:48:32.660 | DEBUG    | __main__:<module>:1 - r::::rrr:::::::::r   ee::::::::::::ee h::::hh:::::hhh    oo:::::::::::oob::::::::::::::bb  oo:::::::::::oo  a::::::::::::a  mm:::::::m  m:::::::mm
+2020-04-22 21:48:32.775 | DEBUG    | __main__:<module>:1 - r:::::::::::::::::r e::::::eeeee:::::eh::::::::::::::hh o:::::::::::::::b::::::::::::::::bo:::::::::::::::o aaaaaaaaa:::::am::::::::::mm::::::::::m
+2020-04-22 21:48:32.885 | DEBUG    | __main__:<module>:1 - rr::::::rrrrr::::::e::::::e     e:::::h:::::::hhh::::::ho:::::ooooo:::::b:::::bbbbb:::::::o:::::ooooo:::::o          a::::am::::::::::::::::::::::m
+2020-04-22 21:48:32.996 | DEBUG    | __main__:<module>:1 - r:::::r     r:::::e:::::::eeeee::::::h::::::h   h::::::o::::o     o::::b:::::b    b::::::o::::o     o::::o   aaaaaaa::::::am:::::mmm::::::mmm:::::m
+2020-04-22 21:48:33.109 | DEBUG    | __main__:<module>:1 - r:::::r     rrrrrre:::::::::::::::::eh:::::h     h:::::o::::o     o::::b:::::b     b:::::o::::o     o::::o aa:::::::::::::am::::m   m::::m   m::::m
+2020-04-22 21:48:33.218 | DEBUG    | __main__:<module>:1 - r:::::r           e::::::eeeeeeeeeee h:::::h     h:::::o::::o     o::::b:::::b     b:::::o::::o     o::::oa::::aaaa:::::::am::::m   m::::m   m::::m
+2020-04-22 21:48:33.326 | DEBUG    | __main__:<module>:1 - r:::::r           e:::::::e          h:::::h     h:::::o::::o     o::::b:::::b     b:::::o::::o     o::::a::::a    a::::::am::::m   m::::m   m::::m
+2020-04-22 21:48:33.439 | DEBUG    | __main__:<module>:1 - r:::::r           e::::::::e         h:::::h     h:::::o:::::ooooo:::::b:::::bbbbbb::::::o:::::ooooo:::::a::::a    a::::::am::::m   m::::m   m::::m
+2020-04-22 21:48:33.545 | DEBUG    | __main__:<module>:1 - r:::::r            e::::::::eeeeeeee h:::::h     h:::::o:::::::::::::::b::::::::::::::::bo:::::::::::::::a:::::aaaa:::::::am::::m   m::::m   m::::m
+2020-04-22 21:48:33.662 | DEBUG    | __main__:<module>:1 - r:::::r             ee:::::::::::::e h:::::h     h:::::hoo:::::::::::oob:::::::::::::::b  oo:::::::::::oo a::::::::::aa::::m::::m   m::::m   m::::m
+2020-04-22 21:48:33.775 | DEBUG    | __main__:<module>:1 - rrrrrrr               eeeeeeeeeeeeee hhhhhhh     hhhhhhh  ooooooooooo  bbbbbbbbbbbbbbbb     ooooooooooo    aaaaaaaaaa  aaaammmmmm   mmmmmm   mmmmmm
+2020-04-22 21:48:33.880 | DEBUG    | __main__:<module>:1 - identity: qrbjmwp
+2020-04-22 21:48:33.999 | DEBUG    | __main__:<module>:1 - remote: false
+2020-04-22 21:48:34.101 | DEBUG    | __main__:<module>:1 - eosurl: http://host.docker.internal:8888
+2020-04-22 21:48:34.209 | DEBUG    | __main__:<module>:1 - port: 15480
+2020-04-22 21:48:34.320 | DEBUG    | __main__:<module>:1 - server_address: host.docker.internal
+2020-04-22 21:48:34.430 | DEBUG    | __main__:<module>:1 - bind_address: 0.0.0.0
+2020-04-22 21:48:34.540 | DEBUG    | __main__:<module>:1 - logdir: data/qrbjmwp/logs
+2020-04-22 21:48:34.648 | DEBUG    | __main__:<module>:1 - upnpc: false
+2020-04-22 21:48:34.763 | DEBUG    | __main__:<module>:1 - === run locally. ===
+2020-04-22 21:48:34.874 | DEBUG    | __main__:<module>:1 - === building bittensor image. ===
+2020-04-22 21:48:58.772 | DEBUG    | __main__:<module>:1 - Run command: ./scripts/transformer.sh qrbjmwp host.docker.internal 0.0.0.0 15480 http://host.docker.internal:8888 data/qrbjmwp/logs
+2020-04-22 21:48:58.878 | DEBUG    | __main__:<module>:1 - === run the docker container locally ===
+2020-04-22 21:48:58.999 | DEBUG    | __main__:<module>:1 - === container image: bittensor:latest ===
+2020-04-22 21:48:59.169 | DEBUG    | __main__:<module>:1 - === stop transformer container ===
+2020-04-22 21:48:59.337 | DEBUG    | __main__:<module>:1 - === stop transformer container ===
+2020-04-22 21:49:09.937 | DEBUG    | __main__:<module>:1 -                                                                         bbbbbbbb                                                                    
+2020-04-22 21:49:10.051 | DEBUG    | __main__:<module>:1 -                                       hhhhhhh                           b::::::b                                                                    
+2020-04-22 21:49:10.169 | DEBUG    | __main__:<module>:1 -                                       h:::::h                           b::::::b                                                                    
+2020-04-22 21:49:10.286 | DEBUG    | __main__:<module>:1 -                                       h:::::h                           b::::::b                                                                    
+2020-04-22 21:49:10.399 | DEBUG    | __main__:<module>:1 -                                       h:::::h                           b:::::b                                                                    
+2020-04-22 21:49:10.506 | DEBUG    | __main__:<module>:1 - rrrrr   rrrrrrrrr      eeeeeeeeeeee   h::::h hhhhh         ooooooooooo  b:::::bbbbbbbbb      ooooooooooo    aaaaaaaaaaaaa     mmmmmmm    mmmmmmm   
+2020-04-22 21:49:10.635 | DEBUG    | __main__:<module>:1 - r::::rrr:::::::::r   ee::::::::::::ee h::::hh:::::hhh    oo:::::::::::oob::::::::::::::bb  oo:::::::::::oo  a::::::::::::a  mm:::::::m  m:::::::mm
+2020-04-22 21:49:10.750 | DEBUG    | __main__:<module>:1 - r:::::::::::::::::r e::::::eeeee:::::eh::::::::::::::hh o:::::::::::::::b::::::::::::::::bo:::::::::::::::o aaaaaaaaa:::::am::::::::::mm::::::::::m
+2020-04-22 21:49:10.861 | DEBUG    | __main__:<module>:1 - rr::::::rrrrr::::::e::::::e     e:::::h:::::::hhh::::::ho:::::ooooo:::::b:::::bbbbb:::::::o:::::ooooo:::::o          a::::am::::::::::::::::::::::m
+2020-04-22 21:49:10.981 | DEBUG    | __main__:<module>:1 - r:::::r     r:::::e:::::::eeeee::::::h::::::h   h::::::o::::o     o::::b:::::b    b::::::o::::o     o::::o   aaaaaaa::::::am:::::mmm::::::mmm:::::m
+2020-04-22 21:49:11.097 | DEBUG    | __main__:<module>:1 - r:::::r     rrrrrre:::::::::::::::::eh:::::h     h:::::o::::o     o::::b:::::b     b:::::o::::o     o::::o aa:::::::::::::am::::m   m::::m   m::::m
+2020-04-22 21:49:11.206 | DEBUG    | __main__:<module>:1 - r:::::r           e::::::eeeeeeeeeee h:::::h     h:::::o::::o     o::::b:::::b     b:::::o::::o     o::::oa::::aaaa:::::::am::::m   m::::m   m::::m
+2020-04-22 21:49:11.323 | DEBUG    | __main__:<module>:1 - r:::::r           e:::::::e          h:::::h     h:::::o::::o     o::::b:::::b     b:::::o::::o     o::::a::::a    a::::::am::::m   m::::m   m::::m
+2020-04-22 21:49:11.430 | DEBUG    | __main__:<module>:1 - r:::::r           e::::::::e         h:::::h     h:::::o:::::ooooo:::::b:::::bbbbbb::::::o:::::ooooo:::::a::::a    a::::::am::::m   m::::m   m::::m
+2020-04-22 21:49:11.542 | DEBUG    | __main__:<module>:1 - r:::::r            e::::::::eeeeeeee h:::::h     h:::::o:::::::::::::::b::::::::::::::::bo:::::::::::::::a:::::aaaa:::::::am::::m   m::::m   m::::m
+2020-04-22 21:49:11.645 | DEBUG    | __main__:<module>:1 - r:::::r             ee:::::::::::::e h:::::h     h:::::hoo:::::::::::oob:::::::::::::::b  oo:::::::::::oo a::::::::::aa::::m::::m   m::::m   m::::m
+2020-04-22 21:49:11.756 | DEBUG    | __main__:<module>:1 - rrrrrrr               eeeeeeeeeeeeee hhhhhhh     hhhhhhh  ooooooooooo  bbbbbbbbbbbbbbbb     ooooooooooo    aaaaaaaaaa  aaaammmmmm   mmmmmm   mmmmmm
+2020-04-22 21:49:11.868 | DEBUG    | __main__:<module>:1 - identity: grraxah
+2020-04-22 21:49:11.976 | DEBUG    | __main__:<module>:1 - remote: false
+2020-04-22 21:49:12.081 | DEBUG    | __main__:<module>:1 - eosurl: http://host.docker.internal:8888
+2020-04-22 21:49:12.195 | DEBUG    | __main__:<module>:1 - port: 31777
+2020-04-22 21:49:12.305 | DEBUG    | __main__:<module>:1 - server_address: host.docker.internal
+2020-04-22 21:49:12.416 | DEBUG    | __main__:<module>:1 - bind_address: 0.0.0.0
+2020-04-22 21:49:12.519 | DEBUG    | __main__:<module>:1 - logdir: data/grraxah/logs
+2020-04-22 21:49:12.627 | DEBUG    | __main__:<module>:1 - upnpc: false
+2020-04-22 21:49:12.736 | DEBUG    | __main__:<module>:1 - === run locally. ===
+2020-04-22 21:49:12.846 | DEBUG    | __main__:<module>:1 - === building bittensor image. ===
+2020-04-22 21:49:34.534 | DEBUG    | __main__:<module>:1 - Run command: ./scripts/transformer.sh grraxah host.docker.internal 0.0.0.0 31777 http://host.docker.internal:8888 data/grraxah/logs
+2020-04-22 21:49:34.653 | DEBUG    | __main__:<module>:1 - === run the docker container locally ===
+2020-04-22 21:49:34.761 | DEBUG    | __main__:<module>:1 - === container image: bittensor:latest ===
+2020-04-22 21:49:35.377 | DEBUG    | __main__:<module>:1 - === follow logs ===
+2020-04-22 21:50:23.185 | DEBUG    | __main__:<module>:1 - === stop transformer container ===
+2020-04-22 21:50:24.013 | DEBUG    | __main__:<module>:1 - === stop transformer container ===
+2020-04-22 21:50:51.720 | DEBUG    | __main__:<module>:1 -                                                                         bbbbbbbb                                                                    
+2020-04-22 21:50:51.832 | DEBUG    | __main__:<module>:1 -                                       hhhhhhh                           b::::::b                                                                    
+2020-04-22 21:50:51.942 | DEBUG    | __main__:<module>:1 -                                       h:::::h                           b::::::b                                                                    
+2020-04-22 21:50:52.051 | DEBUG    | __main__:<module>:1 -                                       h:::::h                           b::::::b                                                                    
+2020-04-22 21:50:52.168 | DEBUG    | __main__:<module>:1 -                                       h:::::h                           b:::::b                                                                    
+2020-04-22 21:50:52.285 | DEBUG    | __main__:<module>:1 - rrrrr   rrrrrrrrr      eeeeeeeeeeee   h::::h hhhhh         ooooooooooo  b:::::bbbbbbbbb      ooooooooooo    aaaaaaaaaaaaa     mmmmmmm    mmmmmmm   
+2020-04-22 21:50:52.401 | DEBUG    | __main__:<module>:1 - r::::rrr:::::::::r   ee::::::::::::ee h::::hh:::::hhh    oo:::::::::::oob::::::::::::::bb  oo:::::::::::oo  a::::::::::::a  mm:::::::m  m:::::::mm
+2020-04-22 21:50:52.512 | DEBUG    | __main__:<module>:1 - r:::::::::::::::::r e::::::eeeee:::::eh::::::::::::::hh o:::::::::::::::b::::::::::::::::bo:::::::::::::::o aaaaaaaaa:::::am::::::::::mm::::::::::m
+2020-04-22 21:50:52.618 | DEBUG    | __main__:<module>:1 - rr::::::rrrrr::::::e::::::e     e:::::h:::::::hhh::::::ho:::::ooooo:::::b:::::bbbbb:::::::o:::::ooooo:::::o          a::::am::::::::::::::::::::::m
+2020-04-22 21:50:52.725 | DEBUG    | __main__:<module>:1 - r:::::r     r:::::e:::::::eeeee::::::h::::::h   h::::::o::::o     o::::b:::::b    b::::::o::::o     o::::o   aaaaaaa::::::am:::::mmm::::::mmm:::::m
+2020-04-22 21:50:52.838 | DEBUG    | __main__:<module>:1 - r:::::r     rrrrrre:::::::::::::::::eh:::::h     h:::::o::::o     o::::b:::::b     b:::::o::::o     o::::o aa:::::::::::::am::::m   m::::m   m::::m
+2020-04-22 21:50:52.948 | DEBUG    | __main__:<module>:1 - r:::::r           e::::::eeeeeeeeeee h:::::h     h:::::o::::o     o::::b:::::b     b:::::o::::o     o::::oa::::aaaa:::::::am::::m   m::::m   m::::m
+2020-04-22 21:50:53.070 | DEBUG    | __main__:<module>:1 - r:::::r           e:::::::e          h:::::h     h:::::o::::o     o::::b:::::b     b:::::o::::o     o::::a::::a    a::::::am::::m   m::::m   m::::m
+2020-04-22 21:50:53.179 | DEBUG    | __main__:<module>:1 - r:::::r           e::::::::e         h:::::h     h:::::o:::::ooooo:::::b:::::bbbbbb::::::o:::::ooooo:::::a::::a    a::::::am::::m   m::::m   m::::m
+2020-04-22 21:50:53.290 | DEBUG    | __main__:<module>:1 - r:::::r            e::::::::eeeeeeee h:::::h     h:::::o:::::::::::::::b::::::::::::::::bo:::::::::::::::a:::::aaaa:::::::am::::m   m::::m   m::::m
+2020-04-22 21:50:53.404 | DEBUG    | __main__:<module>:1 - r:::::r             ee:::::::::::::e h:::::h     h:::::hoo:::::::::::oob:::::::::::::::b  oo:::::::::::oo a::::::::::aa::::m::::m   m::::m   m::::m
+2020-04-22 21:50:53.515 | DEBUG    | __main__:<module>:1 - rrrrrrr               eeeeeeeeeeeeee hhhhhhh     hhhhhhh  ooooooooooo  bbbbbbbbbbbbbbbb     ooooooooooo    aaaaaaaaaa  aaaammmmmm   mmmmmm   mmmmmm
+2020-04-22 21:50:53.623 | DEBUG    | __main__:<module>:1 - identity: hcbvfxg
+2020-04-22 21:50:53.743 | DEBUG    | __main__:<module>:1 - remote: false
+2020-04-22 21:50:53.857 | DEBUG    | __main__:<module>:1 - eosurl: http://host.docker.internal:8888
+2020-04-22 21:50:53.967 | DEBUG    | __main__:<module>:1 - port: 8404
+2020-04-22 21:50:54.075 | DEBUG    | __main__:<module>:1 - server_address: host.docker.internal
+2020-04-22 21:50:54.190 | DEBUG    | __main__:<module>:1 - bind_address: 0.0.0.0
+2020-04-22 21:50:54.302 | DEBUG    | __main__:<module>:1 - logdir: data/hcbvfxg/logs
+2020-04-22 21:50:54.413 | DEBUG    | __main__:<module>:1 - upnpc: false
+2020-04-22 21:50:54.523 | DEBUG    | __main__:<module>:1 - === run locally. ===
+2020-04-22 21:50:54.638 | DEBUG    | __main__:<module>:1 - === building bittensor image. ===
+2020-04-22 21:51:19.000 | DEBUG    | __main__:<module>:1 - Run command: ./scripts/transformer.sh hcbvfxg host.docker.internal 0.0.0.0 8404 http://host.docker.internal:8888 data/hcbvfxg/logs
+2020-04-22 21:51:19.098 | DEBUG    | __main__:<module>:1 - === run the docker container locally ===
+2020-04-22 21:51:19.212 | DEBUG    | __main__:<module>:1 - === container image: bittensor:latest ===
+2020-04-22 21:51:19.685 | DEBUG    | __main__:<module>:1 - === follow logs ===
+2020-04-22 21:51:59.089 | DEBUG    | __main__:<module>:1 - === stop transformer container ===
+2020-04-22 21:52:00.069 | DEBUG    | __main__:<module>:1 - === stop transformer container ===
+2020-04-22 21:52:50.768 | DEBUG    | __main__:<module>:1 -                                                                         bbbbbbbb                                                                    
+2020-04-22 21:52:50.883 | DEBUG    | __main__:<module>:1 -                                       hhhhhhh                           b::::::b                                                                    
+2020-04-22 21:52:50.995 | DEBUG    | __main__:<module>:1 -                                       h:::::h                           b::::::b                                                                    
+2020-04-22 21:52:51.106 | DEBUG    | __main__:<module>:1 -                                       h:::::h                           b::::::b                                                                    
+2020-04-22 21:52:51.221 | DEBUG    | __main__:<module>:1 -                                       h:::::h                           b:::::b                                                                    
+2020-04-22 21:52:51.332 | DEBUG    | __main__:<module>:1 - rrrrr   rrrrrrrrr      eeeeeeeeeeee   h::::h hhhhh         ooooooooooo  b:::::bbbbbbbbb      ooooooooooo    aaaaaaaaaaaaa     mmmmmmm    mmmmmmm   
+2020-04-22 21:52:51.455 | DEBUG    | __main__:<module>:1 - r::::rrr:::::::::r   ee::::::::::::ee h::::hh:::::hhh    oo:::::::::::oob::::::::::::::bb  oo:::::::::::oo  a::::::::::::a  mm:::::::m  m:::::::mm
+2020-04-22 21:52:51.567 | DEBUG    | __main__:<module>:1 - r:::::::::::::::::r e::::::eeeee:::::eh::::::::::::::hh o:::::::::::::::b::::::::::::::::bo:::::::::::::::o aaaaaaaaa:::::am::::::::::mm::::::::::m
+2020-04-22 22:08:08.987 | DEBUG    | __main__:<module>:1 -                                                                         bbbbbbbb                                                                    
+2020-04-22 22:08:09.187 | DEBUG    | __main__:<module>:1 -                                       hhhhhhh                           b::::::b                                                                    
+2020-04-22 22:08:09.383 | DEBUG    | __main__:<module>:1 -                                       h:::::h                           b::::::b                                                                    
+2020-04-22 22:08:09.578 | DEBUG    | __main__:<module>:1 -                                       h:::::h                           b::::::b                                                                    
+2020-04-22 22:08:09.776 | DEBUG    | __main__:<module>:1 -                                       h:::::h                           b:::::b                                                                    
+2020-04-22 22:08:09.970 | DEBUG    | __main__:<module>:1 - rrrrr   rrrrrrrrr      eeeeeeeeeeee   h::::h hhhhh         ooooooooooo  b:::::bbbbbbbbb      ooooooooooo    aaaaaaaaaaaaa     mmmmmmm    mmmmmmm   
+2020-04-22 22:08:10.167 | DEBUG    | __main__:<module>:1 - r::::rrr:::::::::r   ee::::::::::::ee h::::hh:::::hhh    oo:::::::::::oob::::::::::::::bb  oo:::::::::::oo  a::::::::::::a  mm:::::::m  m:::::::mm
+2020-04-22 22:08:10.363 | DEBUG    | __main__:<module>:1 - r:::::::::::::::::r e::::::eeeee:::::eh::::::::::::::hh o:::::::::::::::b::::::::::::::::bo:::::::::::::::o aaaaaaaaa:::::am::::::::::mm::::::::::m
+2020-04-22 22:08:10.559 | DEBUG    | __main__:<module>:1 - rr::::::rrrrr::::::e::::::e     e:::::h:::::::hhh::::::ho:::::ooooo:::::b:::::bbbbb:::::::o:::::ooooo:::::o          a::::am::::::::::::::::::::::m
+2020-04-22 22:08:10.756 | DEBUG    | __main__:<module>:1 - r:::::r     r:::::e:::::::eeeee::::::h::::::h   h::::::o::::o     o::::b:::::b    b::::::o::::o     o::::o   aaaaaaa::::::am:::::mmm::::::mmm:::::m
+2020-04-22 22:08:10.953 | DEBUG    | __main__:<module>:1 - r:::::r     rrrrrre:::::::::::::::::eh:::::h     h:::::o::::o     o::::b:::::b     b:::::o::::o     o::::o aa:::::::::::::am::::m   m::::m   m::::m
+2020-04-22 22:08:11.148 | DEBUG    | __main__:<module>:1 - r:::::r           e::::::eeeeeeeeeee h:::::h     h:::::o::::o     o::::b:::::b     b:::::o::::o     o::::oa::::aaaa:::::::am::::m   m::::m   m::::m
+2020-04-22 22:08:11.346 | DEBUG    | __main__:<module>:1 - r:::::r           e:::::::e          h:::::h     h:::::o::::o     o::::b:::::b     b:::::o::::o     o::::a::::a    a::::::am::::m   m::::m   m::::m
+2020-04-22 22:08:11.547 | DEBUG    | __main__:<module>:1 - r:::::r           e::::::::e         h:::::h     h:::::o:::::ooooo:::::b:::::bbbbbb::::::o:::::ooooo:::::a::::a    a::::::am::::m   m::::m   m::::m
+2020-04-22 22:08:11.742 | DEBUG    | __main__:<module>:1 - r:::::r            e::::::::eeeeeeee h:::::h     h:::::o:::::::::::::::b::::::::::::::::bo:::::::::::::::a:::::aaaa:::::::am::::m   m::::m   m::::m
+2020-04-22 22:08:11.938 | DEBUG    | __main__:<module>:1 - r:::::r             ee:::::::::::::e h:::::h     h:::::hoo:::::::::::oob:::::::::::::::b  oo:::::::::::oo a::::::::::aa::::m::::m   m::::m   m::::m
+2020-04-22 22:08:12.132 | DEBUG    | __main__:<module>:1 - rrrrrrr               eeeeeeeeeeeeee hhhhhhh     hhhhhhh  ooooooooooo  bbbbbbbbbbbbbbbb     ooooooooooo    aaaaaaaaaa  aaaammmmmm   mmmmmm   mmmmmm
+2020-04-22 22:08:12.328 | DEBUG    | __main__:<module>:1 - identity: lmkqkoq
+2020-04-22 22:08:12.524 | DEBUG    | __main__:<module>:1 - remote: false
+2020-04-22 22:08:12.719 | DEBUG    | __main__:<module>:1 - eosurl: http://host.docker.internal:8888
+2020-04-22 22:08:12.914 | DEBUG    | __main__:<module>:1 - port: 20449
+2020-04-22 22:08:13.110 | DEBUG    | __main__:<module>:1 - server_address: host.docker.internal
+2020-04-22 22:08:13.305 | DEBUG    | __main__:<module>:1 - bind_address: 0.0.0.0
+2020-04-22 22:08:13.501 | DEBUG    | __main__:<module>:1 - logdir: data/lmkqkoq/logs
+2020-04-22 22:08:13.698 | DEBUG    | __main__:<module>:1 - upnpc: false
+2020-04-22 22:08:13.895 | DEBUG    | __main__:<module>:1 - === run locally. ===
+2020-04-22 22:08:14.090 | DEBUG    | __main__:<module>:1 - === building bittensor image. ===
+2020-04-22 22:09:05.409 | DEBUG    | __main__:<module>:1 - Run command: ./scripts/transformer.sh lmkqkoq host.docker.internal 0.0.0.0 20449 http://host.docker.internal:8888 data/lmkqkoq/logs
+2020-04-22 22:09:05.606 | DEBUG    | __main__:<module>:1 - === run the docker container locally ===
+2020-04-22 22:09:05.808 | DEBUG    | __main__:<module>:1 - === container image: bittensor:latest ===
+2020-04-22 22:09:06.741 | DEBUG    | __main__:<module>:1 - === follow logs ===
+2020-04-22 22:10:30.199 | DEBUG    | __main__:<module>:1 - === stop transformer container ===
+2020-04-22 22:10:31.607 | DEBUG    | __main__:<module>:1 - === stop transformer container ===
